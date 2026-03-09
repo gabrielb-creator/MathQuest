@@ -1,0 +1,208 @@
+// ===== CONFIGURATION =====
+// Change API_BASE to match your XAMPP path
+const API_BASE = "php/";
+
+// Difficulty levels: timer is for the WHOLE quiz, not per question
+const DIFFICULTY_LEVELS = [
+  { level: 1, name: "Beginner", totalTime: 120, questions: 5,  range: [1, 10] },
+  { level: 2, name: "Easy",     totalTime: 115, questions: 8,  range: [1, 20] },
+  { level: 3, name: "Novice",   totalTime: 110, questions: 10, range: [1, 30] },
+  {
+    level: 4,
+    name: "Intermediate",
+    totalTime: 115,
+    questions: 12,
+    range: [10, 50],
+  },
+  { level: 5, name: "Skilled", totalTime: 115, questions: 15, range: [15, 75] },
+  {
+    level: 6,
+    name: "Advanced",
+    totalTime: 110,
+    questions: 15,
+    range: [20, 100],
+  },
+  { level: 7, name: "Expert", totalTime: 240, questions: 20, range: [50, 150] },
+  {
+    level: 8,
+    name: "Master",
+    totalTime: 105,
+    questions: 20,
+    range: [100, 450],
+  },
+  {
+    level: 9,
+    name: "Genius",
+    totalTime: 100,
+    questions: 25,
+    range: [250, 700],
+  },
+  {
+    level: 10,
+    name: "Legend",
+    totalTime: 90,
+    questions: 30,
+    range: [500, 2500],
+  },
+];
+
+const CATEGORIES = {
+  addition: {
+    icon: "➕",
+    name: "Addition",
+    desc: "Master the art of adding numbers",
+  },
+  subtraction: {
+    icon: "➖",
+    name: "Subtraction",
+    desc: "Perfect your subtracting skills",
+  },
+  multiplication: {
+    icon: "✖️",
+    name: "Multiplication",
+    desc: "Multiply your way to victory",
+  },
+  division: {
+    icon: "➗",
+    name: "Division",
+    desc: "Divide and conquer the challenges",
+  },
+};
+
+const AVATARS = [
+  { id: "avatar1", emoji: "🦊", label: "Fox" },
+  { id: "avatar2", emoji: "🐺", label: "Wolf" },
+  { id: "avatar3", emoji: "🦁", label: "Lion" },
+  { id: "avatar4", emoji: "🐯", label: "Tiger" },
+  { id: "avatar5", emoji: "🐻", label: "Bear" },
+  { id: "avatar6", emoji: "🐼", label: "Panda" },
+  { id: "avatar7", emoji: "🦉", label: "Owl" },
+  { id: "avatar8", emoji: "🦅", label: "Eagle" },
+  { id: "avatar9", emoji: "🐲", label: "Dragon" },
+  { id: "avatar10", emoji: "🦄", label: "Unicorn" },
+  { id: "avatar11", emoji: "🐱", label: "Cat" },
+  { id: "avatar12", emoji: "🐶", label: "Dog" },
+];
+
+const DEFAULT_ACHIEVEMENTS = [
+  {
+    id: "first_steps",
+    name: "First Steps",
+    description: "Complete your first quiz",
+    icon: "⭐",
+    requirementType: "quizzes_completed",
+    requirementValue: 1,
+  },
+  {
+    id: "getting_started",
+    name: "Getting Started",
+    description: "Complete 5 quizzes",
+    icon: "🚀",
+    requirementType: "quizzes_completed",
+    requirementValue: 5,
+  },
+  {
+    id: "quiz_enthusiast",
+    name: "Quiz Enthusiast",
+    description: "Complete 25 quizzes",
+    icon: "🔥",
+    requirementType: "quizzes_completed",
+    requirementValue: 25,
+  },
+  {
+    id: "quiz_master",
+    name: "Quiz Master",
+    description: "Complete 100 quizzes",
+    icon: "👑",
+    requirementType: "quizzes_completed",
+    requirementValue: 100,
+  },
+  {
+    id: "sharp_mind",
+    name: "Sharp Mind",
+    description: "Score 100 total points",
+    icon: "🧠",
+    requirementType: "total_score",
+    requirementValue: 100,
+  },
+  {
+    id: "math_wizard",
+    name: "Math Wizard",
+    description: "Score 500 total points",
+    icon: "🪄",
+    requirementType: "total_score",
+    requirementValue: 500,
+  },
+  {
+    id: "math_legend",
+    name: "Math Legend",
+    description: "Score 2000 total points",
+    icon: "🏆",
+    requirementType: "total_score",
+    requirementValue: 2000,
+  },
+  {
+    id: "perfect_score",
+    name: "Perfect Score",
+    description: "Get 100% accuracy in a quiz",
+    icon: "🎯",
+    requirementType: "perfect_quiz",
+    requirementValue: 1,
+  },
+  {
+    id: "on_fire",
+    name: "On Fire",
+    description: "Reach a 3-quiz win streak",
+    icon: "🔥",
+    requirementType: "current_streak",
+    requirementValue: 3,
+  },
+  {
+    id: "unstoppable",
+    name: "Unstoppable",
+    description: "Reach a 10-quiz win streak",
+    icon: "⚡",
+    requirementType: "current_streak",
+    requirementValue: 10,
+  },
+  {
+    id: "speed_demon",
+    name: "Speed Demon",
+    description: "Finish a quiz with 50%+ time left",
+    icon: "⏱️",
+    requirementType: "speed_bonus",
+    requirementValue: 1,
+  },
+  {
+    id: "addition_pro",
+    name: "Addition Pro",
+    description: "Complete 10 addition quizzes",
+    icon: "➕",
+    requirementType: "addition_completed",
+    requirementValue: 10,
+  },
+  {
+    id: "subtraction_pro",
+    name: "Subtraction Pro",
+    description: "Complete 10 subtraction quizzes",
+    icon: "➖",
+    requirementType: "subtraction_completed",
+    requirementValue: 10,
+  },
+  {
+    id: "multiplication_pro",
+    name: "Multiplication Pro",
+    description: "Complete 10 multiplication quizzes",
+    icon: "✖️",
+    requirementType: "multiplication_completed",
+    requirementValue: 10,
+  },
+  {
+    id: "division_pro",
+    name: "Division Pro",
+    description: "Complete 10 division quizzes",
+    icon: "➗",
+    requirementType: "division_completed",
+    requirementValue: 10,
+  },
+];
